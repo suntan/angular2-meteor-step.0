@@ -25,14 +25,21 @@ $ curl https://install.meteor.com/ | sh
 安裝完成，會列出以下關於建立Meteor Application的簡單引道訊息:
 
 Meteor 1.3.2.4 has been installed in your home directory (~/.meteor).
-Writing a launcher script to /usr/local/bin/meteor for your convenience.  為了啟動Meteor的方便，已將啟動腳本寫入到 /usr/local/bin/meteor 
+
+Writing a launcher script to /usr/local/bin/meteor for your convenience.
+// 為了啟動Meteor的方便，已將啟動腳本寫入到 /usr/local/bin/meteor 
 
 To get started fast:
+
   $ meteor create ~/my_cool_app
+  
   $ cd ~/my_cool_app
+  
   $ meteor
+  
 Or see the docs at:
-  docs.meteor.com   詳細說明的網址
+
+  docs.meteor.com  // 詳細說明的網址
 
 按照官網的介紹教學引導建立socially專案，輸入指令如下:
 
@@ -41,23 +48,32 @@ $ meteor create socially
 專案建立完成可得到如下訊息:
 
 Created a new Meteor app in 'socially'.
-To run your new app:   啟動此專案的步驟指令
+
+To run your new app:  // 啟動此專案的步驟指令
+
   cd socially
+  
   meteor
+  
 If you are new to Meteor, try some of the learning resources here:
 
   https://www.meteor.com/learn   詳細的新手操作學習資源
 
 
 進入剛建立的 socially 範例專案資料，並以 meteor -p <port> 啟動專案:
+
 $ cd socially
-$ meteor -p 3002   很多時候我們的機器上會有許多個應用服務，可以透過此 -p指令來指定端口
+
+$ meteor -p 3002  // 很多時候我們的機器上會有許多個應用服務，可以透過此 -p指令來指定端口
 
 請啟過程中會進行如下三步的編譯動作，成功後可開啟瀏覽器進行範例測試:
 
 => Started proxy
+
 => Started MongoDB.
+
 => Started your app.
+
 >=> App running at: http://localhost:3002/  /// 測試位址
 
 
@@ -66,6 +82,7 @@ Meteor Web Application 是一個Server & Client 的架構；我們在剛建立�
 照官網的介紹是要建立一個全新的 socially專案，請把上述client 資料夾中的檔案全刪掉，輸入指令如下 :
 
 $ cd client
+
 $ rm -rf *.*
 
 建立一個新的檔案 index.html ，並寫入如下內容 :
@@ -136,15 +153,21 @@ $ meteor add angular2-compilers
 Changes to your project's package version selections:
 
 angular2-compilers            added, version 0.5.6
+
 angular2-html-templates        added, version 0.5.2
+
 barbatus:typescript            added, version 0.2.10
+
 barbatus:typescript-compiler     added, version 0.5.7
+
 barbatus:typescript-runtime      added, version 0.1.1
+
 angular2-compilers: Angular 2 Templates, HTML and TypeScript compilers for Meteor
 
 安裝 Meteor 套件，並依照package.json設定載入套件相依性，執行以下指令:
 
 $ meteor npm install --save angular2-meteor
+
 $ meteor npm install --save meteor-node-stubs
 
 Note : 上述執行過程中，會有很多NPM套件的警告訊息；具官網說這是’正常’的，如果有興趣可參考:
@@ -159,10 +182,15 @@ $ meteor remove blaze-html-templates
 可得到以下訊息 :
 
 Changes to your project's package version selections:
+
 blaze-html-templates   removed from your project
+
 caching-html-compiler  removed from your project
+
 templating           removed from your project
+
 templating-tools       removed from your project
+
 blaze-html-templates: removed dependency
 
 依照官網所說的是在稱頌自己將回應給client的HTML進行合併為一個<HTML>、<HEAD>、<BODY>， Angular 2 則還是用Component 來作page對應開發元組件；至於在每個directive、component的 template中寫<HTML>、<HEAD>、<BODY>這本來就是一種很怪的事..XXD! 但假設有這種情況照目前的情況看來，Metor 就會將頁面進行整合. (感覺上像是一種防蠢機制)
@@ -226,19 +254,26 @@ Meteor執行到此沒有發生編譯錯誤，那是上面一開始就定義了ts
 /// < reference path="typings/angular2-meteor/angular2-meteor.d.ts" / >
 
 import {Component} from 'angular2/core';
+
 import {bootstrap} from 'angular2/platform/browser';
 
 2.	在專案根目錄下定義一個 tsconfig.json ，按照Meteor官網所說，往下的引導教學將會用到此檔案；而且 Angular 2 、Meteor 的API每個檔案也都會使用到．請執行以下指令安裝 typins :
 
 $ npm install typings -g
+
 $ typings install es6-promise
+
 $ typings install es6-shim --ambient
+
 
 透過上述指令的執行，專案根目錄下會由npm 帶入 typings 資料夾及其definition 設定檔main.d.ts，但Meteor的typings 則需要我們手動建立，將Meteor於GitHub上的 meteor.d.ts 檔案下載到 typings 資料夾內 ，執行命令如下 :
 
 $ cd typings
+
 $ git clone https://gist.github.com/tomitrescak/8366ce98f1857e202ea8
+
 $ cp 8366ce98f1857e202ea8/meteor.d.ts meteor.d.ts
+
 $ rm -rf 8366ce98f1857e202ea8/
 
 然後開啟 typings/main.d.ts 檔案，加入以下設定 :
