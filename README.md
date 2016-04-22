@@ -55,10 +55,12 @@ $ meteor -p 3002   很多時候我們的機器上會有許多個應用服務�
 Meteor Web Application 是一個Server & Client 的架構；我們在剛建立的socially專案中也可以找到server、client兩個資料夾作為對應，預設情況下我們所剛啟動的Meteor 應用是使用我們剛建立的 socially 專案 client資料夾中的 *.js、*.html、*.css 這三個檔案。
 
 照官網的介紹是要建立一個全新的 socially專案，請把上述client 資料夾中的檔案全刪掉，輸入指令如下 :
+
 $ cd client
 $ rm -rf *.*
 
 建立一個新的檔案 index.html ，並寫入如下內容 :
+
 <body>
 <p>Nothing here</p>
 </body>
@@ -69,6 +71,7 @@ $ rm -rf *.*
 
 # NPM-套件管理
 可於專案根目錄下使用 npm init 以問答方式重新建立 package.json；或修改 package.json 檔案內容如下:
+
 {
   "name": "socially",
   "version": "1.0.0",
