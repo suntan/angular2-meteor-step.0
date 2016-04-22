@@ -95,6 +95,7 @@ Meteor 1.3 本身是使用CommonJS進行模組的 import / export 動作，而An
 官網講的很長，大概的意思是，目前多數主流瀏覽器仍是以ES5為核心，縱使ES6普及也要一段時間，實際發展中的版本已到達ES7，而Angular 2.0 的框架是在server side撰寫ES6，最終還是會轉譯為ES5提供給前端使用者(這視前端使用者的瀏覽器而定，如果前端瀏覽器支援ES6那就無需轉譯) 。而TypeScript (Microsoft 與 Google 攜手打造的) 無論如何都會編譯成用戶端可執行的JS版本，而且在後續的應用中我們會體驗到 TypeScript所帶來的便利性與其他的擴充延展，在教學的後面將慢慢有所以驗。( 畢竟你Meteor也還沒那實力跟 Google和Microsoft其中任一家叫板吧! 何況兩個巨人相加，- 而且Angular 2.0以後本來主推TypeScript ；有能耐你弄一套更屌的出來嘛!)
 
 要使用TypeScript，所以請新增 tsconfig.json 檔案；並寫入基本設定如下 :
+
 {
   "compilerOptions": {
     "experimentalDecorators": true,
@@ -120,6 +121,7 @@ Meteor 1.3 本身是使用CommonJS進行模組的 import / export 動作，而An
 $ meteor add angular2-compilers
 
 可得到以下訊息:
+
 Changes to your project's package version selections:
 angular2-compilers            added, version 0.5.6
 angular2-html-templates        added, version 0.5.2
@@ -129,6 +131,7 @@ barbatus:typescript-runtime      added, version 0.1.1
 angular2-compilers: Angular 2 Templates, HTML and TypeScript compilers for Meteor
 
 安裝 Meteor 套件，並依照package.json設定載入套件相依性，執行以下指令:
+
 $ meteor npm install --save angular2-meteor
 $ meteor npm install --save meteor-node-stubs
 
@@ -136,9 +139,11 @@ Note : 上述執行過程中，會有很多NPM套件的警告訊息；具官網�
 
 # HTML整合
 從上面的操作中我們知道Meteor會自動將所有HTML進行合併，而Angular 則是使用我們自己開發定義的元組件directive 或component，而無論directive、component都是一個HTML樣板與一支JS所組成的，Angular不是一開始就將所有的元組件進行加載，而是在需要該自定義元組件時才進行載入，所以使用angular-compilers 替換 Meteor 的HTML處理方式，使用以下指令去除 Meteor HTML Processor :
+
 $ meteor remove blaze-html-templates
 
 可得到以下訊息 :
+
 Changes to your project's package version selections:
 blaze-html-templates   removed from your project
 caching-html-compiler  removed from your project
@@ -154,6 +159,7 @@ blaze-html-templates: removed dependency
 Meteor官網的說明是Angular 專案就像一株Component Tree(元件樹) , 而Root Componet 就像這棵樹的根。可能多數時間都是寫C#、JAVA，我把Component、Directive都看成Object，Object可以是Class、Interface . . . ; 至於Component、Directive中所包含的 tempalte、Injetable . . .就是 Object 中的 Property，而在C#、JAVA的應用程式中都必定由Entry Point開始。
 
 在client 資料夾內建立 app.ts 作為 Entry Point ( Root Component )，並寫入以下內容:
+
 import 'reflect-metadata';
 import 'zone.js/dist/zone';
 import {Component} from 'angular2/core';
@@ -183,11 +189,13 @@ Hello World!
 
 # Run the App - 執行應用程式
 透過上述過程，我們將index.html修改如下:
+
 <body>
   <app></app>
 </body>
 
 執行App ,　回到專案根目錄，並輸入以下指令:
+
 $ meteor -p 3002
 
 Note: 開啟瀏覽器應該會看到 Hello World! 字串，檢視原始碼，也會看到index.html中我們剛剛添加的內容。
@@ -197,28 +205,33 @@ Meteor執行到此沒有發生編譯錯誤，那是上面一開始就定義了ts
 
 讓 TypeScript 編譯器知道我們使用外部套件的方法下列兩種　：
 1.	在開發的 *.ts 檔案中加入 import 寫法如下:
+
 /// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 
 2.	在專案根目錄下定義一個 tsconfig.json ，按照Meteor官網所說，往下的引導教學將會用到此檔案；而且 Angular 2 、Meteor 的API每個檔案也都會使用到．請執行以下指令安裝 typins :
+
 $ npm install typings -g
 $ typings install es6-promise
 $ typings install es6-shim --ambient
 
 透過上述指令的執行，專案根目錄下會由npm 帶入 typings 資料夾及其definition 設定檔main.d.ts，但Meteor的typings 則需要我們手動建立，將Meteor於GitHub上的 meteor.d.ts 檔案下載到 typings 資料夾內 ，執行命令如下 :
+
 $ cd typings
 $ git clone https://gist.github.com/tomitrescak/8366ce98f1857e202ea8
 $ cp 8366ce98f1857e202ea8/meteor.d.ts meteor.d.ts
 $ rm -rf 8366ce98f1857e202ea8/
 
 然後開啟 typings/main.d.ts 檔案，加入以下設定 :
+
 /// <reference path="meteor.d.ts" />
 
 最後官網建議日後在 tsconfig.json 檔案中記得加入 "moduleResolution": "node" 的設定，讓TypeScript可以在node_modules自動尋找到 *.d.ts 檔案。
 
 # Experiments - 實驗
 請將 client/app.html 修改如下，並以 memtor -p <port> 進行測試:
+
 <p>1 + 2 = {{ 1 + 2 }}</p>
 
