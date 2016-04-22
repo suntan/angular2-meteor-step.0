@@ -206,7 +206,7 @@ Meteor執行到此沒有發生編譯錯誤，那是上面一開始就定義了ts
 讓 TypeScript 編譯器知道我們使用外部套件的方法下列兩種　：
 1.	在開發的 *.ts 檔案中加入 import 寫法如下:
 
-/// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
+/// < reference path="typings/angular2-meteor/angular2-meteor.d.ts" / >
 
 import {Component} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
@@ -226,7 +226,7 @@ $ rm -rf 8366ce98f1857e202ea8/
 
 然後開啟 typings/main.d.ts 檔案，加入以下設定 :
 
-<reference path="meteor.d.ts" />
+///< reference path="meteor.d.ts" / >
 
 最後官網建議日後在 tsconfig.json 檔案中記得加入 "moduleResolution": "node" 的設定，讓TypeScript可以在node_modules自動尋找到 *.d.ts 檔案。
 
